@@ -17,6 +17,7 @@ const Navbar = ({cartLength}) => {
                     <Link to="/" className="hover:underline">Home</Link>
                     <Link to="/products" className="hover:underline">Products</Link>
                     <Link to="/about" className="hover:underline">About</Link>
+                    <Link to="/login" className="hover:underline absolute right-10">Login</Link>
                 </div>
                 <div className="flex">
                     <Link to="/cart">
@@ -24,6 +25,8 @@ const Navbar = ({cartLength}) => {
                     </Link>
                     <span className="text-black relative right-6 top-1">{items}</span>
                 </div>
+
+
             </div>
         </nav>
     );
