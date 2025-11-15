@@ -17,7 +17,7 @@ const Navbar = ({cartLength}) => {
                     <Link to="/" className="hover:underline">Home</Link>
                     <Link to="/products" className="hover:underline">Products</Link>
                     <Link to="/about" className="hover:underline">About</Link>
-                    <Link to="/login" className="hover:underline absolute right-10">Login</Link>
+                    <Link to="/login" className="hover:underline absolute right-25">Login</Link>
                 </div>
                 <div className="flex">
                     <Link to="/cart">
