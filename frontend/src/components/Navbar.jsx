@@ -11,7 +11,7 @@ const Navbar = ({cartLength}) => {
     },[cartLength])
 
     return (
-        <nav className="w-full bg-gray-400 text-white px-6 py-4 shadow-md mb-12">
+        <nav className="w-full bg-gray-400 text-white px-6 py-4 shadow-md mb-12 navbar">
             <div className="max-w-screen-xl mx-auto flex justify-between items-center">
                 <div className="space-x-4 text-lg">
                     <Link to="/" className="hover:underline">Home</Link>
