@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
 import styles from "../assets/Login.module.css"
 import { useState } from "react";
+import axios from "axios"
 
 const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     const submitHandler = () => {
+
+        if(username.length === 0 || password.length === 0){
+            setError("Both fields are required ;(")
+            return    
+        }
+
         if(username?.length < 3){
             setError("Username must contain atleast 3 chracters")
             return
@@ -17,6 +25,14 @@ const Login = () => {
            setError("Password must contain atleast 8 characters")  
            return   
         }
+
+        axios.get('http://localhost:4000/login')
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        })
     }
 
         return (
