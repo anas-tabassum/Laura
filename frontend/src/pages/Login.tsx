@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import styles from "../assets/Login.module.css"
 import { useState } from "react";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
-    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate()
+    // const [loading, setLoading] = useState(false)
 
     const submitHandler = () => {
 
@@ -26,12 +28,16 @@ const Login = () => {
            return   
         }
 
-        axios.get('http://localhost:4000/login')
-        .then(response => {
-            console.log(response);
+        axios.post('http://localhost:4000/login', {
+            username,
+            password
+        })
+        .then(_ => {
+            navigate('/')
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
+            console.error('Error fetching data:', error.response.data);
+            setError(error.response.data.message)
         })
     }
 
@@ -46,7 +52,7 @@ const Login = () => {
 
                 <div className={styles.input_container}>
                     <label htmlFor="">Password</label>
-                    <input type="text" value={password} onChange={e => setPassword(e.target.value)}/>
+                    <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
                 </div>
 
                 <button className={styles.submit_btn} onClick={submitHandler}>Login</button>
