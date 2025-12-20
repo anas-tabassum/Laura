@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "../assets/Login.module.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 
@@ -32,14 +32,27 @@ const Login = () => {
             username,
             password
         })
-        .then(_ => {
-            navigate('/')
+        .then(data => {
+            console.log(data.data)
+            if(data.data.success){
+                localStorage.setItem("login", "true")
+                navigate('/')
+            }
         })
         .catch(error => {
             console.error('Error fetching data:', error.response.data);
             setError(error.response.data.message)
         })
     }
+
+    useEffect(()=>{
+        const isLoggedIn = !!localStorage.getItem("login")
+
+        if(isLoggedIn) {
+            navigate('/')
+            return
+        }
+    },[])
 
         return (
             <div className={`${styles.wrapper} login_box`}>

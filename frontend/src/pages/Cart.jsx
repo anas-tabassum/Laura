@@ -1,8 +1,21 @@
 import React from 'react';
 import { useSelector } from 'react-redux'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 const Cart = () => {
     const data = useSelector(state => state.cart)
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        const isLoggedIn = !!localStorage.getItem("login")
+
+        if(!isLoggedIn) {
+            navigate('/')
+            return
+        }
+    },[])
 
     return (
         <div className="max-w-5xl mx-auto px-4 py-8">
