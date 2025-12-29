@@ -13,14 +13,19 @@ import Products from "./pages/Products.jsx";
 
 const App = () => {
     const [cartItems, setCartItems] = useState([]);
+    const [auth, setAuth] = useState(false)
 
     const cartHandle = (id) => {
         setCartItems((prevState) => [...prevState, id]);
     }
+
+    const authHandler = (val) =>{
+        setAuth(val)
+    }
   return (
     <div  className="flex justify-center flex-wrap">
         <BrowserRouter>
-        <Navbar cartLength={cartItems.length} />
+        <Navbar cartLength={cartItems.length} onAuthUpdate = {auth} />
             <Routes>
                 <Route path="*" element={<Error />} />
                 <Route path="/" element={<Home />} />
@@ -28,7 +33,9 @@ const App = () => {
                 <Route path="/about" element={<About />} />
                 <Route path="/cart" element={<Cart cartItems = {cartItems} />} />
                 <Route path="/details/:id" element={<Details onCartHandle = {cartHandle} />}  />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" 
+                    element={<Login onSetAuth = {authHandler}
+                />} />
                 <Route path="/logout" element={<Logout />} />
                 <Route path="/register" element={<Register/>} />
             </Routes>
